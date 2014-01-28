@@ -32,6 +32,14 @@ gem 'bson_ext'
 # mandrill
 gem 'mandrill-api'
 
+# devise
+gem 'devise'
+
+# haml
+gem 'haml'
+
+# bootstrap
+gem 'bootstrap-sass-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
