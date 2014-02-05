@@ -1,0 +1,22 @@
+%header.nav.navbar.navbar-default.navbar-static-top
+  %div.container
+    %div.navbar-header
+      %a.navbar-brand{href: '/'}
+        Buttr
+    %nav.collapse.navbar-collapse.bs-navbar-collapse
+      %ul.nav.navbar-nav.pull-right
+        - unless current_user
+          %li
+            = link_to 'Login In', new_user_session_path 
+          %li
+            = link_to 'Sign Up', new_user_registration_path 
+        - else
+          %li.dropdown
+            %a.dropdown-toggle{:'data-toggle' => "dropdown"}
+              = current_user.display_name
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                = link_to 'Manage my Account', edit_user_registration_path
+              %li
+                = link_to 'Sign Out', destroy_user_session_path, method: :delete
