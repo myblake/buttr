@@ -25,20 +25,20 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# mongo
+# Persistence
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
+gem 'mongoid_slug'
 
-# mandrill
+# Email
 gem 'mandrill-api'
 
-# devise
+# Users
 gem 'devise'
+gem 'cancan'
 
-# haml
+# Front end
 gem 'haml'
-
-# bootstrap
 gem 'bootstrap-sass-rails'
 
 group :doc do
@@ -55,7 +55,11 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
