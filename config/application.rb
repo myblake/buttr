@@ -33,5 +33,7 @@ module Buttr
       :authentication => :plain
     }
     ActionMailer::Base.delivery_method = :smtp
+    
+    config.assets.initialize_on_precompile = false
   end
 end
