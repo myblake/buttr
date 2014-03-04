@@ -1,0 +1,15 @@
+=form_for @buyer, url: buyers_path do |f|
+  %div.form-group
+    =f.label :first_name
+    =f.text_field :first_name, class: 'form-control'
+  %div.form-group
+    =f.label :last_name
+    =f.text_field :last_name, class: 'form-control'
+  %div.form-group
+    =f.label :email
+    =f.text_field :email, class: 'form-control'
+  %div.form-group
+    =f.label :phone
+    =f.text_field :phone, class: 'form-control'
+  %div.form-group
+    =f.submit "Save", class: 'btn btn-default'

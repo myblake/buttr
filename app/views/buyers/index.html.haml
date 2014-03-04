@@ -1,0 +1,18 @@
+%table.table
+  %tr
+    %th
+      Name
+    %th
+      Email
+    %th
+      Phone
+  -if @buyers.present?
+    -@buyers.each do |buyer|
+      %tr
+        %td
+          =link_to buyer.name, buyer_path(buyer)
+        %td
+          =buyer.email
+        %td
+          =buyer.phone
+=link_to "Add Buyer", new_buyer_path

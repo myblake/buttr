@@ -1,0 +1,22 @@
+%table.table
+  %tr
+    %th
+      Name
+    %th
+      Buyer
+    %th
+      Email
+    %th
+      Phone
+  -if @customers.present?
+    -@customers.each do |customer|
+      %tr
+        %td
+          =link_to customer.name, customer_path(customer)
+        %td
+          =link_to customer.buyer.name, buyer_path(customer.buyer)
+        %td
+          =customer.email
+        %td
+          =customer.phone
+=link_to "Add Customer", new_customer_path

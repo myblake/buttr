@@ -3,7 +3,12 @@
     %div.navbar-header
       %a.navbar-brand{href: '/'}
         Buttr
-    %nav.collapse.navbar-collapse.bs-navbar-collapse
+    %nav.collapse.navbar-collapse.bs-navbar-collapse{role: "navigation"}
+      %ul.nav.navbar-nav
+        %li
+          =link_to "Buyers", buyers_path
+        %li
+          =link_to "Customers", customers_path
       %ul.nav.navbar-nav.pull-right
         - unless current_user
           %li

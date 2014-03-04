@@ -1,5 +1,12 @@
 class User
   include Mongoid::Document
+
+  has_many :lists
+  has_one :customer_profile
+
+  has_many :customers, class_name: "User"
+  belongs_to :buyer, class_name: "User"
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -25,7 +32,37 @@ class User
 
   field :first_name, type: String
   field :last_name, type: String
+  field :user_type, type: String
+  field :phone, type: String
+  field :wunderlist_url, type: String
+  field :feedback_url, type: String
 
+  validates_uniqueness_of :email
+  #validates_inclusion_of :user_type, in: User.user_types
+  
+  def self.user_types
+    %w(admin bttr buyer customer)
+  end
+
+  def phone_stripped
+    stripped = self.phone.gsub(/[^\d]/,'')
+    if stripped.length == 10
+      stripped = "1" + stripped
+    end
+    stripped
+  end
+
+  def self.buyer_list
+    User.where(user_type: 'buyer')
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def self.buyer_list_for_select
+    buyer_list.map{|buyer| ["#{buyer.first_name} #{buyer.last_name}", buyer.id]}
+  end
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time

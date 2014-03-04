@@ -1,0 +1,12 @@
+%h2
+  Customer
+%p
+  =@customer.name
+%p
+  =@customer.email
+%p
+  =@customer.phone
+%h3
+  Buyer
+%p
+  =link_to @customer.buyer.name, buyer_path(@customer.buyer)

@@ -1,0 +1,14 @@
+%h2
+  Buyer
+%p
+  =@buyer.name
+%p
+  =@buyer.email
+%p
+  =@buyer.phone
+%h3
+  Customers
+%ul
+  -@buyer.customers.each do |customer|
+    %li
+      =link_to customer.name, customer_path(customer)
