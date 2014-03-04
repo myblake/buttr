@@ -8,7 +8,7 @@
       Email
     %th
       Phone
-  -if @customers.present?
+  -if !@customers.nil?
     -@customers.each do |customer|
       %tr
         %td

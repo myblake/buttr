@@ -1,0 +1,19 @@
+%div
+  =@list.shopping_date
+  =@list.user.display_name
+  =form_for ListItem.new do |f|
+    =f.label :description
+    =f.text_field :description
+    =f.label :category
+    =f.text_field :category
+    =f.hidden_field :list_id, value: @list.id
+    =f.submit "Add New Item"
+
+  -@list.list_items_by_category.each do |category, list_items|
+    %h3
+      =category
+    -list_items.each do |list_item|
+      %div
+        %label
+          =check_box_tag :active
+          =list_item.description

@@ -1,0 +1,4 @@
+%h2 
+  Lists
+-@lists.each do |list|
+  =link_to list.user.display_name, list_path(list)

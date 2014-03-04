@@ -1,0 +1,9 @@
+=form_for @list do |f|
+  =f.label :shopping_date
+  =f.text_field :shopping_date, class: "datepicker"
+  %label
+    User
+  %span
+    =current_user.display_name
+    =f.hidden_field :user_id, value: current_user.id.to_s
+  =f.submit "Create"

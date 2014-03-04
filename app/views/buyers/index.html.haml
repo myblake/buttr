@@ -6,7 +6,7 @@
       Email
     %th
       Phone
-  -if @buyers.present?
+  -if !@buyers.nil?
     -@buyers.each do |buyer|
       %tr
         %td
