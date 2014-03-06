@@ -6,6 +6,12 @@
   =@customer.email
 %p
   =@customer.phone
+%p
+  =@customer.wunderlist_url
+%p
+  =@customer.feedback_url
+%p
+  =link_to "Edit", edit_customer_path(@customer)
 %h3
   Buyer
 %p

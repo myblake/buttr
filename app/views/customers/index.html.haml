@@ -8,6 +8,7 @@
       Email
     %th
       Phone
+    %th
   -if !@customers.nil?
     -@customers.each do |customer|
       %tr
@@ -19,4 +20,18 @@
           =customer.email
         %td
           =customer.phone
+        %td
+          %div.btn-group
+            %button.btn.btn-xs.btn-default.dropdown-toggle{type:"button", :"data-toggle" => "dropdown"}
+              Actions
+              %span.caret
+            %ul.dropdown-menu{role:"menu"}
+              %li
+                %span{style:"padding:3px 20px;"}
+                  Notifcations
+              %li.divider
+              %li
+                =link_to "Shopping", customer_shopping_path(user_id: customer.id)
+              %li
+                =link_to "Drop off", customer_dropoff_path(user_id: customer.id)
 =link_to "Add Customer", new_customer_path

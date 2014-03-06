@@ -1,0 +1,17 @@
+%h2
+  Customer Shopping
+%table.table
+  %tr
+    %th
+      Summary
+    %th
+      Location
+    %th
+      Description
+  %tr
+    %td
+      ="#{@user.phone_stripped},#{@user.email}"
+    %td
+      =@user.wunderlist_url
+    %td
+      =@user.buyer.first_name

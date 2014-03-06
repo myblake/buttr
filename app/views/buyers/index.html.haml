@@ -6,6 +6,7 @@
       Email
     %th
       Phone
+    %th
   -if !@buyers.nil?
     -@buyers.each do |buyer|
       %tr
@@ -15,4 +16,16 @@
           =buyer.email
         %td
           =buyer.phone
+        %td
+          %div.btn-group
+            %button.btn.btn-xs.btn-default.dropdown-toggle{type:"button", :"data-toggle" => "dropdown"}
+              Actions
+              %span.caret
+            %ul.dropdown-menu{role:"menu"}
+              %li
+                %span{style:"padding:3px 20px;"}
+                  Notifcations
+              %li.divider
+              %li
+                =link_to "Shopping", buyer_shopping_path(user_id: buyer.id)
 =link_to "Add Buyer", new_buyer_path

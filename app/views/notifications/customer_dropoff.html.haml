@@ -1,0 +1,17 @@
+%h2
+  Customer Drop Off
+%table.table
+  %tr
+    %th
+      Summary
+    %th
+      Location
+    %th
+      Description
+  %tr
+    %td
+      ="#{@user.phone_stripped},#{@user.email}"
+    %td
+      =@user.first_name
+    %td
+      =@user.buyer.first_name

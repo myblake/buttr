@@ -1,0 +1,17 @@
+%h2
+  Buyer Shopping
+%table.table
+  %tr
+    %th
+      Summary
+    %th
+      Location
+    %th
+      Description
+  %tr
+    %td
+      ="#{@user.phone_stripped},#{@user.email}"
+    %td
+      =@user.first_name
+    %td
+      =@user.customers.pluck(:first_name).join(', ')

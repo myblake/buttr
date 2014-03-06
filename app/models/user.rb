@@ -6,6 +6,7 @@ class User
 
   has_many :customers, class_name: "User"
   belongs_to :buyer, class_name: "User"
+  embeds_one :shopping_time
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -36,6 +37,8 @@ class User
   field :phone, type: String
   field :wunderlist_url, type: String
   field :feedback_url, type: String
+  field :shopping_day, type: String
+  field :shopping_time, type: Time
 
   validates_uniqueness_of :email
   #validates_inclusion_of :user_type, in: User.user_types
@@ -63,16 +66,7 @@ class User
   def self.buyer_list_for_select
     buyer_list.map{|buyer| ["#{buyer.first_name} #{buyer.last_name}", buyer.id]}
   end
-  ## Confirmable
-  # field :confirmation_token,   :type => String
-  # field :confirmed_at,         :type => Time
-  # field :confirmation_sent_at, :type => Time
-  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
-  ## Lockable
-  # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
-  # field :locked_at,       :type => Time
   def display_name
     "#{self.first_name} #{self.last_name}"
   end

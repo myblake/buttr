@@ -1,15 +1,15 @@
 %header.nav.navbar.navbar-default.navbar-static-top
   %div.container
     %div.navbar-header
-      %a.navbar-brand{href: '/'}
-        Buttr
+      %a.navbar-brand{href: '/', style: 'padding:5px'}
+        =image_tag 'bttr.png'
     %nav.collapse.navbar-collapse.bs-navbar-collapse{role: "navigation"}
       %ul.nav.navbar-nav
         %li
           =link_to "Buyers", buyers_path
         %li
           =link_to "Customers", customers_path
-      %ul.nav.navbar-nav.pull-right
+      %ul.nav.navbar-nav.navbar-right
         - unless current_user
           %li
             = link_to 'Login In', new_user_session_path 
