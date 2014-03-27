@@ -17,6 +17,7 @@ class CustomersController < UsersController
   end
 
   def wallet
+    @customer.create_wallet if @customer.wallet.nil? 
   end
 
   def update_wallet
