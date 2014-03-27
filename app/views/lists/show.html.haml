@@ -1,6 +1,6 @@
 %div
   =@list.shopping_date
-  =@list.user.display_name
+  =@list.user.name
   =form_for ListItem.new do |f|
     =f.label :description
     =f.text_field :description

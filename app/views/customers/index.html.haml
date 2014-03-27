@@ -15,7 +15,8 @@
         %td
           =link_to customer.name, customer_path(customer)
         %td
-          =link_to customer.buyer.name, buyer_path(customer.buyer)
+          -if customer.buyer.present?
+            =link_to customer.buyer.name, buyer_path(customer.buyer)
         %td
           =customer.email
         %td

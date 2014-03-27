@@ -1,11 +1,11 @@
 %h2
-  Customer
-%p
   =@customer.name
 %p
   =@customer.email
 %p
   =@customer.phone
+%p
+  Wallet balance: #{number_to_currency(@customer.wallet.nil? ? 0 : @customer.wallet.balance)}
 %p
   =@customer.wunderlist_url
 %p

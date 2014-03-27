@@ -1,5 +1,7 @@
 class NotificationsController < ApplicationController
+  # load_and_authorize_resource
   before_filter :set_user
+  before_filter :authorized?
   def customer_dropoff
   end
 
@@ -11,5 +13,9 @@ class NotificationsController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def authorized?
+    authorize! :show, @user
   end
 end

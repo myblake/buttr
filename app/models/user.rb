@@ -1,12 +1,15 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps::Short
 
   has_many :lists
   has_one :customer_profile
 
   has_many :customers, class_name: "User"
   belongs_to :buyer, class_name: "User"
-  embeds_one :shopping_time
+  
+  #embeds_one :shopping_time
+  embeds_one :wallet
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -46,7 +49,7 @@ class User
   def self.user_types
     %w(admin bttr buyer customer)
   end
-
+  
   def phone_stripped
     stripped = self.phone.gsub(/[^\d]/,'')
     if stripped.length == 10
@@ -67,7 +70,7 @@ class User
     buyer_list.map{|buyer| ["#{buyer.first_name} #{buyer.last_name}", buyer.id]}
   end
 
-  def display_name
-    "#{self.first_name} #{self.last_name}"
+  def admin?
+    self.user_type == 'admin'
   end
 end

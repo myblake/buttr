@@ -1,0 +1,22 @@
+%h2
+  Users
+%table.table
+  %tr
+    %th
+      Name
+    %th
+      Email
+    %th
+      Type
+    %th
+      Created
+  -@users.each do |user|
+    %tr
+      %td
+        =link_to user.name, user_path(user)
+      %td
+        =user.email
+      %td
+        =user.user_type
+      %td
+        =user.c_at

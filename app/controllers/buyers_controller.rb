@@ -1,4 +1,4 @@
-class BuyersController < ApplicationController
+class BuyersController < UsersController
   def index
     @buyers = User.buyer_list
   end

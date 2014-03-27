@@ -1,4 +1,6 @@
-class CustomersController < ApplicationController
+class CustomersController < UsersController
+  before_action :set_customer, only: [:show, :wallet, :update_wallet, :edit, :update]
+
   def index
     @customers = User.where(user_type: 'customer')
   end
@@ -8,15 +10,31 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = User.find(params[:id])
+    if @customer.user_type != 'customer'
+      flash[:alert] = "User is not a customer"
+      redirect_to "/"
+    end
+  end
+
+  def wallet
+  end
+
+  def update_wallet
+    amount = params[:transaction][:amount].to_f
+    wallet = @customer.wallet || @customer.create_wallet
+    if params[:transaction][:transaction_type] == 'credit'
+      wallet.credit(amount, params[:transaction][:note])
+    elsif params[:transaction][:transaction_type] == 'debit'
+      wallet.debit(amount, params[:transaction][:note])
+    end
+    wallet.save
+    redirect_to action: 'wallet'
   end
 
   def edit
-    @customer = User.find(params[:id])
   end
 
   def update
-    @customer = User.find(params[:id])
     @customer.update_attributes(params[:user].permit(permitted_fields))
     redirect_to action: :show
   end
@@ -31,5 +49,9 @@ class CustomersController < ApplicationController
   private
   def permitted_fields
     [:first_name, :last_name, :email, :phone, :wunderlist_url, :feedback_url]
+  end
+
+  def set_customer
+    @customer = User.find(params[:id])
   end
 end

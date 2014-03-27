@@ -1,0 +1,37 @@
+%h2
+  =@customer.name
+%h3
+  -balance = @customer.wallet.nil? ? 0 : @customer.wallet.balance
+  Wallet balance:
+  %span{style: balance < 0 ? 'color:red' : '' }
+    #{number_to_currency(balance)}
+=form_for :transaction, url: update_customer_wallet_path(id: @customer.id), method: :put do |f|
+  =f.select :transaction_type, options_for_select([["Credit", "credit"],["Debit","debit"]])
+  =f.label :amount, 'Amount $'
+  =f.text_field :amount
+  =f.label :note
+  =f.text_field :note
+  =f.submit "Update"
+
+%h2
+  Transactions
+%table.table
+  %tr
+    %th
+      Date
+    %th
+      Type
+    %th
+      Amount
+    %th
+      Note
+  -@customer.wallet.transactions.each do |t|
+    %tr
+      %td
+        =t.c_at
+      %td
+        =t.transaction_type
+      %td
+        =number_to_currency(t.amount_cents / 100.0)
+      %td
+        =t.note

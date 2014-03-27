@@ -5,9 +5,12 @@ Buttr::Application.routes.draw do
   resources :list_items
   resources :customers
   resources :buyers
+  resources :users
   get 'notifications/:user_id/customer_dropoff' => 'notifications#customer_dropoff', as: :customer_dropoff
   get 'notifications/:user_id/customer_shopping' => 'notifications#customer_shopping', as: :customer_shopping
   get 'notifications/:user_id/buyer_shopping' => 'notifications#buyer_shopping', as: :buyer_shopping
+  get 'customers/:id/wallet' => 'customers#wallet', as: :customer_wallet
+  put 'customers/:id/wallet' => 'customers#update_wallet', as: :update_customer_wallet
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
