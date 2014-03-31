@@ -3,6 +3,8 @@
     %th
       Name
     %th
+      Wallet Balance  
+    %th
       Buyer
     %th
       Email
@@ -14,6 +16,8 @@
       %tr
         %td
           =link_to customer.name, customer_path(customer)
+        %td
+          =link_to number_to_currency(customer.wallet.nil? ? 0 : customer.wallet.balance), customer_wallet_path(customer)
         %td
           -if customer.buyer.present?
             =link_to customer.buyer.name, buyer_path(customer.buyer)

@@ -5,7 +5,7 @@
 %p
   =@customer.phone
 %p
-  Wallet balance: #{number_to_currency(@customer.wallet.nil? ? 0 : @customer.wallet.balance)}
+  =link_to "Wallet balance: #{number_to_currency(@customer.wallet.nil? ? 0 : @customer.wallet.balance)}", customer_wallet_path(@customer)
 %p
   =@customer.wunderlist_url
 %p
