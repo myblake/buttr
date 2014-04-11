@@ -15,4 +15,5 @@
 //= require jquery.ui.all
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+//= require vendor
+//= require_tree ./global
