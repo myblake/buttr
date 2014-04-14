@@ -4,7 +4,7 @@ Buttr::Application.routes.draw do
   resources :lists
   resources :list_items
   resources :customers
-  resources :buyers
+  resources :buyers, path: "shoppers"
   resources :users
   get 'notifications/:user_id/customer_dropoff' => 'notifications#customer_dropoff', as: :customer_dropoff
   get 'notifications/:user_id/customer_shopping' => 'notifications#customer_shopping', as: :customer_shopping
@@ -51,7 +51,7 @@ Buttr::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
