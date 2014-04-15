@@ -16,3 +16,7 @@
   Shopper
 %p
   =link_to @customer.buyer.name, buyer_path(@customer.buyer)
+%p
+  -if @customer.shopping_time.present?
+    =@customer.shopping_time.day
+    =@customer.shopping_time.time

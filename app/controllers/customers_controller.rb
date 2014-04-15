@@ -32,7 +32,7 @@ class CustomersController < UsersController
   end
 
   def update
-    @customer.create_shopping_trip(params[:customer][:shopping_trip]) unless @customer.shopping_trip
+    @customer.create_shopping_time(customer_params[:shopping_time_attributes]) unless @customer.shopping_time
     @customer.update_attributes(customer_params)
     redirect_to action: :show
   end
@@ -46,7 +46,7 @@ class CustomersController < UsersController
 
   private
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :buyer_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_trip: [:day, :time])
+    params.require(:customer).permit(:first_name, :last_name, :buyer_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_time_attributes: [:day, :time])
   end
 
   def set_customer

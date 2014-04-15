@@ -7,6 +7,8 @@
     %th
       Shopper
     %th
+      Shopping Time
+    %th
       Email
     %th
       Phone
@@ -21,6 +23,10 @@
         %td
           -if customer.buyer.present?
             =link_to customer.buyer.name, buyer_path(customer.buyer)
+        %td
+          -if customer.shopping_time.present?
+            =customer.shopping_time.day
+            =customer.shopping_time.time
         %td
           =customer.email
         %td
