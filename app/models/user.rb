@@ -5,12 +5,6 @@ class User
   has_many :lists
   has_one :customer_profile
 
-  has_many :customers, class_name: "User"
-  belongs_to :buyer, class_name: "User"
-  
-  #embeds_one :shopping_time
-  embeds_one :wallet
-  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -40,16 +34,17 @@ class User
   field :phone, type: String
   field :wunderlist_url, type: String
   field :feedback_url, type: String
-  field :shopping_day, type: String
-  field :shopping_time, type: Time
+
+  # TODO remove after migration
+  field :user_type, type: String
 
   validates_uniqueness_of :email
   #validates_inclusion_of :user_type, in: User.user_types
-  
+
   def self.user_types
-    %w(admin bttr buyer customer)
+    %w(User Admin Buyer Customer)
   end
-  
+
   def phone_stripped
     stripped = self.phone.gsub(/[^\d]/,'')
     if stripped.length == 10
@@ -58,16 +53,8 @@ class User
     stripped
   end
 
-  def self.buyer_list
-    User.where(user_type: 'buyer')
-  end
-
   def name
     "#{first_name} #{last_name}"
-  end
-
-  def self.buyer_list_for_select
-    buyer_list.map{|buyer| ["#{buyer.first_name} #{buyer.last_name}", buyer.id]}
   end
 
   def admin?

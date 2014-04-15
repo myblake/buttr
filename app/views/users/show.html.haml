@@ -4,6 +4,6 @@
   =@user.email
 =form_tag user_path(@user), method: :put do
   %p
-    =select_tag :user_type, options_for_select([''] + User.user_types, @user.user_type)
+    =select_tag :_type, options_for_select([''] + User.user_types, @user._type)
   %p
     =submit_tag :update

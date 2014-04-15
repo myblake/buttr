@@ -17,6 +17,7 @@
       %td
         =user.email
       %td
-        =user.user_type
+        - #for some reason _type sometimes isn't set during migration. can probably be remove down the road
+        =user.read_attribute('_type')
       %td
         =user.c_at

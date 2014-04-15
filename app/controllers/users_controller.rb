@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.user_type = params[:user_type]
+    @user.update_attribute('_type', params[:_type])
     @user.save
     redirect_to action: :show
   end

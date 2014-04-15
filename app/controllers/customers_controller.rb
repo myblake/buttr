@@ -2,22 +2,18 @@ class CustomersController < UsersController
   before_action :set_customer, only: [:show, :wallet, :update_wallet, :edit, :update]
 
   def index
-    @customers = User.where(user_type: 'customer')
+    @customers = Customer.all
   end
 
   def new
-    @customer = User.new
+    @customer = Customer.new
   end
 
   def show
-    if @customer.user_type != 'customer'
-      flash[:alert] = "User is not a customer"
-      redirect_to "/"
-    end
   end
 
   def wallet
-    @customer.create_wallet if @customer.wallet.nil? 
+    @customer.create_wallet if @customer.wallet.nil?
   end
 
   def update_wallet
@@ -36,23 +32,24 @@ class CustomersController < UsersController
   end
 
   def update
-    @customer.update_attributes(params[:user].permit(permitted_fields))
+    @customer.create_shopping_trip(params[:customer][:shopping_trip]) unless @customer.shopping_trip
+    @customer.update_attributes(customer_params)
     redirect_to action: :show
   end
-  
+
   def create
-    @customer = User.create(params[:user].permit(permitted_fields).merge(user_type: 'customer', password: Devise.friendly_token.first(8)))
-    @customer.buyer = User.find(params[:user][:buyer_id])
+    @customer = Customer.create(customer_params.merge(password: Devise.friendly_token.first(8)))
+    @customer.buyer = Buyer.find(params[:customer][:buyer_id])
     @customer.save
     redirect_to action: :index
   end
 
   private
-  def permitted_fields
-    [:first_name, :last_name, :email, :phone, :wunderlist_url, :feedback_url]
+  def customer_params
+    params.require(:customer).permit(:first_name, :last_name, :buyer_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_trip: [:day, :time])
   end
 
   def set_customer
-    @customer = User.find(params[:id])
+    @customer = Customer.find(params[:id])
   end
 end

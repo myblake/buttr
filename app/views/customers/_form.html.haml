@@ -6,13 +6,25 @@
   =f.text_field :last_name, class: 'form-control'
 %div.form-group
   =f.label :buyer_id
-  =f.select :buyer_id, options_for_select(User.buyer_list_for_select), {}, class: 'form-control'
+  =f.select :buyer_id, options_for_select(Buyer.buyer_list_for_select), {}, class: 'form-control'
 %div.form-group
   =f.label :email
   =f.text_field :email, class: 'form-control'
 %div.form-group
   =f.label :phone
   =f.text_field :phone, class: 'form-control'
+
+= f.fields_for :shopping_trip do |st|
+  Form
+  %h4
+    Shopping trip
+  %div{class: "subform"}
+    %div.form-group
+      =st.label :day
+      =st.select :day, options_for_select(ShoppingTrip.days), {}, class: 'form-control'
+    %div.form-group
+      =st.label :time
+      =st.select :time, options_for_select(ShoppingTrip.times), {}, class: 'form-control'
 %div.form-group
   =f.label :wunderlist_url
   =f.text_field :wunderlist_url, class: 'form-control'
