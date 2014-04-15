@@ -35,9 +35,6 @@ class User
   field :wunderlist_url, type: String
   field :feedback_url, type: String
 
-  # TODO remove after migration
-  field :user_type, type: String
-
   validates_uniqueness_of :email
   #validates_inclusion_of :user_type, in: User.user_types
 
@@ -58,6 +55,6 @@ class User
   end
 
   def admin?
-    self.user_type == 'admin'
+    self._type == 'admin'
   end
 end

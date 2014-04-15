@@ -16,4 +16,4 @@
 //= require turbolinks
 //= require bootstrap
 //= require vendor
-//= require_tree ./global
+//= require_tree ./global/
