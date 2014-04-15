@@ -1,7 +1,7 @@
 class ShoppingTime
   include Mongoid::Document
   belongs_to :customer
-  belongs_to :buyer
+  belongs_to :shopper
   field :day, type: String
   field :time, type: String
 

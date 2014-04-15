@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   def customer_shopping
   end
 
-  def buyer_shopping
+  def shoppers_shopping
   end
 
   def set_user

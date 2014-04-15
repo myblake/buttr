@@ -1,0 +1,18 @@
+%h2
+  Shopper
+%p
+  =@shopper.name
+%p
+  =@shopper.email
+%p
+  =@shopper.phone
+%h3
+  Customers
+%ul
+  -@shopper.customers.each do |customer|
+    %li
+      =link_to customer.name, customer_path(customer)
+      -shopping_time = customer.shopping_time
+      -if shopping_time
+        =shopping_time.day
+        =shopping_time.time

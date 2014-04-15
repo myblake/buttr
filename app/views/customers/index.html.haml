@@ -21,8 +21,8 @@
         %td
           =link_to number_to_currency(customer.wallet.nil? ? 0 : customer.wallet.balance), customer_wallet_path(customer)
         %td
-          -if customer.buyer.present?
-            =link_to customer.buyer.name, buyer_path(customer.buyer)
+          -if customer.shopper.present?
+            =link_to customer.shopper.name, shopper_path(customer.shopper)
         %td
           -if customer.shopping_time.present?
             =customer.shopping_time.day

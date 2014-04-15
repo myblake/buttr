@@ -15,7 +15,8 @@
 %h3
   Shopper
 %p
-  =link_to @customer.buyer.name, buyer_path(@customer.buyer)
+  - if @customer.shopper.present?
+    =link_to @customer.shopper.name, shopper_path(@customer.shopper)
 %p
   -if @customer.shopping_time.present?
     =@customer.shopping_time.day

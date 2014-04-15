@@ -7,15 +7,15 @@
     %th
       Phone
     %th
-  -if !@buyers.nil?
-    -@buyers.each do |buyer|
+  -if !@shoppers.nil?
+    -@shoppers.each do |shopper|
       %tr
         %td
-          =link_to buyer.name, buyer_path(buyer)
+          =link_to shopper.name, shopper_path(shopper)
         %td
-          =buyer.email
+          =shopper.email
         %td
-          =buyer.phone
+          =shopper.phone
         %td
           %div.btn-group
             %button.btn.btn-xs.btn-default.dropdown-toggle{type:"button", :"data-toggle" => "dropdown"}
@@ -27,5 +27,5 @@
                   Notifcations
               %li.divider
               %li
-                =link_to "Shopping", buyer_shopping_path(user_id: buyer.id)
-=link_to "Add Shopper", new_buyer_path
+                =link_to "Shopping", shoppers_shopping_path(user_id: shopper.id)
+=link_to "Add Shopper", new_shopper_path

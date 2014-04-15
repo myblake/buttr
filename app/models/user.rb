@@ -39,7 +39,7 @@ class User
   #validates_inclusion_of :user_type, in: User.user_types
 
   def self.user_types
-    %w(User Admin Buyer Customer)
+    %w(User Admin Shopper Customer)
   end
 
   def phone_stripped

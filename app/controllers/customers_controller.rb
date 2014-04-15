@@ -39,14 +39,14 @@ class CustomersController < UsersController
 
   def create
     @customer = Customer.create(customer_params.merge(password: Devise.friendly_token.first(8)))
-    @customer.buyer = Buyer.find(params[:customer][:buyer_id])
+    @customer.shopper = Shopper.find(params[:customer][:shopper_id])
     @customer.save
     redirect_to action: :index
   end
 
   private
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :buyer_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_time_attributes: [:day, :time])
+    params.require(:customer).permit(:first_name, :last_name, :shopper_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_time_attributes: [:day, :time])
   end
 
   def set_customer

@@ -5,8 +5,8 @@
   =f.label :last_name
   =f.text_field :last_name, class: 'form-control'
 %div.form-group
-  =f.label :buyer_id, "Shopper"
-  =f.select :buyer_id, options_for_select(Buyer.buyer_list_for_select), {}, class: 'form-control'
+  =f.label :shopper_id, "Shopper"
+  =f.select :shopper_id, options_for_select(Shopper.shopper_list_for_select), {}, class: 'form-control'
 %div.form-group
   =f.label :email
   =f.text_field :email, class: 'form-control'
@@ -15,7 +15,7 @@
   =f.text_field :phone, class: 'form-control'
 - @customer.build_shopping_time unless @customer.shopping_time
 = f.fields_for :shopping_time do |st|
-  =st.hidden_field :buyer_id, value: @customer.buyer_id
+  =st.hidden_field :shopper_id, value: @customer.shopper_id
   =st.hidden_field :id
   %h4
     Shopping trip

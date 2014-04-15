@@ -1,5 +1,5 @@
 class Customer < User
-  belongs_to :buyer
+  belongs_to :shopper
   has_one :shopping_time
   accepts_nested_attributes_for :shopping_time
 
