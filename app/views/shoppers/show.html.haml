@@ -6,6 +6,9 @@
   =@shopper.email
 %p
   =@shopper.phone
+%p
+  =@shopper.profile_url
+=link_to "Edit #{@shopper.name}", edit_shopper_path(@shopper)
 %h3
   Customers
 %ul

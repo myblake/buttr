@@ -5,7 +5,3 @@ $(function(){
   });
   $('#customer_shopper_id').trigger('change');
 });
-
-// $('#customer_phone').keyup(function(){
-//
-// });

@@ -14,7 +14,7 @@
   =f.text_field :email, class: 'form-control'
 %div.form-group
   =f.label :phone
-  =f.text_field :phone, class: 'form-control'
+  =f.text_field :phone, class: 'form-control formatted-phone'
 - @customer.build_shopping_time unless @customer.shopping_time
 = f.fields_for :shopping_time do |st|
   =st.hidden_field :shopper_id, value: @customer.shopper_id
@@ -29,10 +29,10 @@
       =st.label :time
       =st.select :time, options_for_select(ShoppingTime.times, st.object.time), {}, class: 'form-control'
 %div.form-group
-  =f.label :wunderlist_url
+  =f.label :wunderlist_url, "Shopping List URL"
   =f.text_field :wunderlist_url, class: 'form-control'
 %div.form-group
-  =f.label :feedback_url
+  =f.label :feedback_url, "Feedback URL"
   =f.text_field :feedback_url, class: 'form-control'
 %div.form-group
   =f.submit "Save", class: 'btn btn-default'
