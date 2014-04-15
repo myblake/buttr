@@ -55,6 +55,6 @@ class User
   end
 
   def admin?
-    self._type == 'admin'
+    self._type == 'Admin'
   end
 end
