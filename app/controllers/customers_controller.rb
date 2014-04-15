@@ -46,7 +46,7 @@ class CustomersController < UsersController
 
   private
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :shopper_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_time_attributes: [:day, :time])
+    params.require(:customer).permit(:first_name, :last_name, :shopper_id, :email, :phone, :wunderlist_url, :feedback_url, shopping_time_attributes: [:id, :shopper_id, :day, :time])
   end
 
   def set_customer

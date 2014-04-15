@@ -1,0 +1,16 @@
+-calendar = @shopper.calendar
+%table.table.table-bordered.calendar-table
+  %tr
+    %th
+    -ShoppingTime.days.each do |day|
+      %th
+        =day
+  -ShoppingTime.times.each do |time|
+    %tr
+      %td
+        =time
+      -ShoppingTime.days.each do |day|
+        %td
+          -unless calendar[day].nil?
+            -calendar[day][time].nil? ? nil : calendar[day][time].each do |st|
+              =link_to st.customer.name, customer_path(st.customer)
