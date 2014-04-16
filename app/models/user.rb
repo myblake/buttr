@@ -55,6 +55,6 @@ class User
   end
 
   def admin?
-    self._type == 'Admin'
+    self.read_attribute('_type') == 'Admin'
   end
 end

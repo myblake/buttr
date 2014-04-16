@@ -34,6 +34,8 @@ module Buttr
     }
     ActionMailer::Base.delivery_method = :smtp
 
+    config.action_mailer.default_url_options = { :host => 'myeasyfridge.com' }
+
     config.assets.initialize_on_precompile = false
     # config/application.rb
     config.assets.precompile << Proc.new do |path|
