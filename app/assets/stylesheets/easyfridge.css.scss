@@ -31,3 +31,16 @@
 .calendar-table th{
   width:12.5%; text-align:center
 }
+
+#main_logo {
+  font-size: 40px;
+  top: 8px;
+  position: relative;
+  color: #f39B13;
+}
+
+@media only screen and (max-width: 768px) {
+  #main_logo {
+    font-size: 30px;
+  }
+}
