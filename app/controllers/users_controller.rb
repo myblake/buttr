@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attribute('_type', params[:_type])
     @user.save
-    redirect_to action: :show
+    redirect_to action: :index
   end
 
   protected

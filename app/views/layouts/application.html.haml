@@ -2,8 +2,9 @@
 %html
   %head
     = render 'layouts/head'
-    = yield :header
   %body
     = render 'layouts/header'
     %div#main_container.container.content
       = yield
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = yield :js_includes
