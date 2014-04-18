@@ -1,5 +1,6 @@
 $(function() {
   $('.datepicker').datepicker();
+  $('.dropdown-toggle').dropdown();
   $('.formatted-phone').keyup(function(){
     formatPhone(this);
   });
