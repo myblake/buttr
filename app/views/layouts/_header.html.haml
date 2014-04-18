@@ -5,6 +5,10 @@
         =image_tag 'bag icon2.gif', style: 'height:40px;'
         %span{style: 'font-size: 40px;top: 8px;position: relative; color: #f39B13'}
           EasyFridge
+      %button.navbar-toggle{type:"button", :'data-toggle' => "collapse", :'data-target' => ".navbar-collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
     %nav.collapse.navbar-collapse.bs-navbar-collapse{role: "navigation"}
       %ul.nav.navbar-nav
         -if can? :read, User
