@@ -31,7 +31,7 @@
   -@customer.wallet.transactions.desc(:created_at).each do |t|
     %tr
       %td
-        =t.c_at
+        =t.c_at.in_time_zone.strftime("%B %e, %Y %l:%M:%S %p %Z")
       %td
         =t.transaction_type
       %td

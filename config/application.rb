@@ -53,5 +53,7 @@ module Buttr
         false
       end
     end
+
+    config.time_zone = "Pacific Time (US & Canada)"
   end
 end
