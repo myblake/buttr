@@ -1,0 +1,1 @@
+function formatPhone(e){var t=$(e),n=e.selectionStart,o=e.selectionEnd,a=t.val().length;t.val(formatLocal("US",t.val()));var l=t.val().length;a===l?e.setSelectionRange(n,o):e.setSelectionRange(l,l)}$(function(){$(".datepicker").datepicker(),$(".dropdown-toggle").dropdown(),$(".formatted-phone").keyup(function(){formatPhone(this)})});
