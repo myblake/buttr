@@ -42,6 +42,8 @@ gem 'cancan'
 # Front end
 gem 'haml'
 
+gem "stripe"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -69,4 +71,3 @@ group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
 end
-
