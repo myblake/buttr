@@ -6,4 +6,7 @@
   %p
     =select_tag :_type, options_for_select([''] + User.user_types, @user._type), class: 'form-control', style: 'width: auto;'
   %p
+    =label_tag :password, "Update Password"
+    =text_field_tag :password
+  %p
     =submit_tag :update, class: "btn btn-default"

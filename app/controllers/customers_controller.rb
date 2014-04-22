@@ -1,5 +1,6 @@
 class CustomersController < UsersController
   before_action :set_customer, only: [:show, :wallet, :update_wallet, :edit, :update]
+  skip_before_filter :authorized?, only: :wallet
 
   def index
     @customers = Customer.all
@@ -13,6 +14,7 @@ class CustomersController < UsersController
   end
 
   def wallet
+    authorize! :read, current_user
     @customer.create_wallet if @customer.wallet.nil?
   end
 

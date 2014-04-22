@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attribute('_type', params[:_type])
+    if params[:password]
+      @user.password = params[:password]
+    end
     @user.save
     redirect_to action: :index
   end

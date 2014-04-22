@@ -3,13 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
-  #before_action :require_login?, if: 
+
   before_filter :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
-  
+
   protected
 
   # from http://stackoverflow.com/questions/16297797/add-custom-field-column-to-devise-with-rails-4
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       }
     elsif params[:action] == 'create'
       devise_parameter_sanitizer.for(:sign_up) { |u|
-        u.permit(registration_params) 
+        u.permit(registration_params)
       }
     end
   end

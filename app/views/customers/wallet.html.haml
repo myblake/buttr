@@ -1,4 +1,4 @@
--content_for :js_includes do 
+-content_for :js_includes do
   = javascript_include_tag 'wallet/wallet.js'
 %h2
   =@customer.name
@@ -7,13 +7,14 @@
   Wallet balance:
   %span{style: balance < 0 ? 'color:red' : '' }
     #{number_to_currency(balance)}
-=form_for :transaction, url: update_customer_wallet_path(id: @customer.id), method: :put do |f|
-  =f.select :transaction_type, options_for_select([["Credit", "credit"],["Debit","debit"]])
-  =f.label :amount, 'Amount $'
-  =f.text_field :amount
-  =f.label :note
-  =f.text_field :note
-  =f.submit "Update"
+-if can? :manage, User
+  =form_for :transaction, url: update_customer_wallet_path(id: @customer.id), method: :put do |f|
+    =f.select :transaction_type, options_for_select([["Credit", "credit"],["Debit","debit"]])
+    =f.label :amount, 'Amount $'
+    =f.text_field :amount
+    =f.label :note
+    =f.text_field :note
+    =f.submit "Update"
 
 %h2
   Transactions
