@@ -1,5 +1,5 @@
 class ShoppersController < UsersController
-  before_action :set_shopper, only: [:show, :edit, :update]
+  before_action :set_shopper, only: [:show, :edit, :update, :toggle_availability]
 
   def index
     @shoppers = Shopper.all
@@ -20,9 +20,20 @@ class ShoppersController < UsersController
   def show
   end
 
+  def master_calendar
+    authorize! :read, :calendar
+  end
+
   def create
     Shopper.create(shopper_params.merge(password: Devise.friendly_token.first(8)))
     redirect_to action: :index
+  end
+
+  def toggle_availability
+    day = params[:day]
+    time = params[:time]
+    status = @shopper.toggle_availability(day, time)
+    render json: status
   end
 
   private

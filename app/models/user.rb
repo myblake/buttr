@@ -50,15 +50,17 @@ class User
     stripped
   end
 
+  def user_type
+    self.read_attribute('_type')
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
 
-  def admin?
-    self.read_attribute('_type') == 'Admin'
-  end
-
-  def customer?
-    self.read_attribute('_type') == 'Customer'
+  # better than method missing (faster) for this case since it's well defined
+  self.user_types.each do |type|
+    method = "is_#{type.downcase}?"
+    define_method(method) { user_type == type }
   end
 end

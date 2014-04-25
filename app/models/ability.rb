@@ -28,10 +28,19 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    alias_action :create, :read, :update, :destroy, :to => :crud
+    alias_action :create, :read, :update, :to => :cru
+
     user ||= User.new # guest user (not logged in)
-    if user.admin?
+    if user.is_admin?
       can :manage, :all
     end
+
+    if user.is_shopper?
+      can :cru, User, id: user.id
+    end
+
     can :read, User, id: user.id
+
   end
 end

@@ -11,16 +11,23 @@
         %span.icon-bar
     %nav.collapse.navbar-collapse.bs-navbar-collapse{role: "navigation"}
       %ul.nav.navbar-nav
-        -if can? :manage, User
-          %li
-            =link_to "Shoppers", shoppers_path
-          %li
-            =link_to "Customers", customers_path
-          %li
-            =link_to "Users", users_path
-        -if can?(:read, current_user) && current_user && current_user.customer?
-          %li
-            =link_to "My Wallet", customer_wallet_path(current_user)
+        -case (current_user.nil? ? nil : current_user.user_type)
+          -when 'Admin'
+            %li
+              =link_to "Calendar", master_calendar_path
+            %li
+              =link_to "Shoppers", shoppers_path
+            %li
+              =link_to "Customers", customers_path
+            %li
+              =link_to "Users", users_path
+          -when 'Customer'
+            %li
+              =link_to "My Wallet", customer_wallet_path(current_user)
+          -when 'Shopper'
+            %li
+              =link_to "My Shopper Profile", shopper_path(current_user)
+          -else
       %ul.nav.navbar-nav.navbar-right
         - unless current_user
           %li

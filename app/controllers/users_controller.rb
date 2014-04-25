@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized?
+  before_action :read_user?
 
   def index
     @users = User.all
@@ -20,7 +20,14 @@ class UsersController < ApplicationController
   end
 
   protected
-  def authorized?
-    authorize! :manage, User
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def read_user?
+    if params[:id]
+      set_user
+    end
+    authorize! :read, @user.nil? ? User : @user
   end
 end

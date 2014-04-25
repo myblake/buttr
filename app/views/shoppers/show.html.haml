@@ -21,4 +21,4 @@
         =shopping_time.time
 %h3
   Calendar
-= render 'calendar'
+= render 'calendar', shopper: @shopper, calendar: @shopper.calendar, availability: @shopper.availability
