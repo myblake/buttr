@@ -1,4 +1,4 @@
-buttr
+EasyFridge
 =====
 
 Set up to deploy to heroku (http://buttr-prod.herokuapp.com/)
