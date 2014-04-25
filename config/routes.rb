@@ -11,6 +11,9 @@ Buttr::Application.routes.draw do
   get 'notifications/:user_id/shoppers_shopping' => 'notifications#shoppers_shopping', as: :shoppers_shopping
   get 'customers/:id/wallet' => 'customers#wallet', as: :customer_wallet
   put 'customers/:id/wallet' => 'customers#update_wallet', as: :update_customer_wallet
+  put 'shopper/:id/toggle' => 'shoppers#toggle_availability', as: :shopper_toggle_availability
+  get 'calendar' => 'shoppers#master_calendar', as: :master_calendar
+  get 'admin' => 'home#admin', as: :admin_home
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
