@@ -25,7 +25,11 @@ class ShoppersController < UsersController
   end
 
   def create
-    Shopper.create(shopper_params.merge(password: Devise.friendly_token.first(8)))
+    shopper = Shopper.create(shopper_params.merge(password: Devise.friendly_token.first(8)))
+    #debugger
+    unless shopper.valid?
+      flash[:error] = ("Shopper could not be created because: " + format_errors(shopper.errors.full_messages)).html_safe
+    end
     redirect_to action: :index
   end
 

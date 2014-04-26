@@ -41,8 +41,13 @@ class CustomersController < UsersController
 
   def create
     @customer = Customer.create(customer_params.merge(password: Devise.friendly_token.first(8)))
-    @customer.shopper = Shopper.find(params[:customer][:shopper_id])
-    @customer.save
+
+    unless @customer.valid?
+      flash[:error] = ("Customer could not be created because: " + format_errors(@customer.errors.full_messages)).html_safe
+    else
+      @customer.shopper = Shopper.find(params[:customer][:shopper_id])
+      @customer.save
+    end
     redirect_to action: :index
   end
 

@@ -5,8 +5,11 @@
 =form_tag user_path(@user), method: :put do
   %p
     =select_tag :_type, options_for_select([''] + User.user_types, @user._type), class: 'form-control', style: 'width: auto;'
-  %p
-    =label_tag :password, "Update Password"
-    =text_field_tag :password
+  -unless @user.is_admin?
+    %p
+      =label_tag :password, "Update Password"  
+      =password_field_tag :password
   %p
     =submit_tag :update, class: "btn btn-default"
+  %p
+    =link_to "Spoof", spoof_user_path(@user.id)

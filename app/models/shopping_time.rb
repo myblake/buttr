@@ -2,6 +2,7 @@ class ShoppingTime
   include Mongoid::Document
   belongs_to :customer
   belongs_to :shopper
+  belongs_to :zone
   field :day, type: String
   field :time, type: String
 

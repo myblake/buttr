@@ -14,6 +14,7 @@ Buttr::Application.routes.draw do
   put 'shopper/:id/toggle' => 'shoppers#toggle_availability', as: :shopper_toggle_availability
   get 'calendar' => 'shoppers#master_calendar', as: :master_calendar
   get 'admin' => 'home#admin', as: :admin_home
+  get 'user/spoof/:new_user_id' => 'users#spoof_user', as: :spoof_user
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

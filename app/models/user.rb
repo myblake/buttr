@@ -3,7 +3,6 @@ class User
   include Mongoid::Timestamps::Short
 
   has_many :lists
-  has_one :customer_profile
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -35,8 +34,17 @@ class User
   field :wunderlist_url, type: String
   field :feedback_url, type: String
 
-  validates_uniqueness_of :email
   #validates_inclusion_of :user_type, in: User.user_types
+
+  # validates_uniqueness_of :email won't work when we directly create from the user subclasses
+  validate :validate_unique_email
+
+  def validate_unique_email
+    existing_user = User.where(email: self.email).first
+    if existing_user && existing_user.id != self.id && existing_user.user_type != self.user_type
+      errors.add(:email, "is already taken")
+    end
+  end
 
   def self.user_types
     %w(User Admin Shopper Customer)
@@ -48,6 +56,10 @@ class User
       stripped = "1" + stripped
     end
     stripped
+  end
+
+  def user_type=(type)
+    self.write_attribute('_type', type)
   end
 
   def user_type

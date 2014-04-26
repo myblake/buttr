@@ -13,4 +13,8 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def format_errors(errors_array)
+    ("<ul><li>" + errors_array.join('</li><li>') + "</li></ul>").html_safe
+  end
 end

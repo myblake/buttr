@@ -1,5 +1,7 @@
 -content_for :js_includes do
   = javascript_include_tag "shopper/shopper.js"
+%div#loader.hidden
+  =image_tag "ajax-loader-circle-ball.gif"
 %table.table.table-bordered.calendar-table
   %tr
     %th
@@ -35,4 +37,4 @@
                 =availability[day][time].map{|s| link_to s.name, shopper_path(s)}.join(', ').html_safe
           -if current_user.is_shopper? && shopper
             -link_text = !availability[day].nil? && availability[day][time] ? "Mark Unavailable" : "Mark Available"
-            =link_to link_text, shopper_toggle_availability_path(id: shopper.id, day: day, time: time), class: 'js-toggle-available'
+            =link_to link_text, shopper_toggle_availability_path(id: shopper.id, day: day, time: time), :"data-day" => day, :"data-time" => time, class: 'js-toggle-available'
