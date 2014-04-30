@@ -46,4 +46,40 @@ $ez_orange: #f39B13;
   #main_logo {
     font-size: 30px;
   }
+
+  /* responsive table, inspired by: http://css-tricks.com/responsive-data-tables/ */
+
+  /* Force table to not be like tables anymore */
+  .rt table, .rt thead, .rt tbody, .rt th, .rt td, .rt tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .rt thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .rt td {
+    /* Behave like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+
+  .rt td:not(.nopad) {
+    padding-left: 50% !important;
+  }
+
+  .rt td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
 }

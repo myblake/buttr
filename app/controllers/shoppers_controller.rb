@@ -34,9 +34,8 @@ class ShoppersController < UsersController
   end
 
   def toggle_availability
-    day = params[:day]
-    time = params[:time]
-    status = @shopper.toggle_availability(day, time)
+    options = params.slice(:day, :time, :level, :zone)
+    status = @shopper.update_availability(options)
     render json: status
   end
 

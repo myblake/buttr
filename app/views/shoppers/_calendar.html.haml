@@ -2,39 +2,53 @@
   = javascript_include_tag "shopper/shopper.js"
 %div#loader.hidden
   =image_tag "ajax-loader-circle-ball.gif"
-%table.table.table-bordered.calendar-table
-  %tr
-    %th
-    -ShoppingTime.days.each do |day|
-      %th
-        =day
-  -ShoppingTime.times.each do |time|
-    %tr
-      %td
-        =time
-      -ShoppingTime.days.each do |day|
-        %td{class: (!availability[day].nil? && availability[day][time]) ? 'calendar-available' : 'calendar-unavailable' }
-          -unless calendar[day].nil?
-            -calendar[day][time].nil? ? nil : calendar[day][time].each do |st|
-              %div
+%div.rt
+  %table.table.table-bordered.calendar-table
+    %thead
+      %tr
+        %th
+        -ShoppingTime.days.each do |day|
+          %th
+            =day
+    -ShoppingTime.times.each do |time|
+      %tr
+        %td.nopad
+          =time.titleize
+        -ShoppingTime.days.each do |day|
+          -level = !availability[day].nil? && availability[day][time] ? availability[day][time].level : "unavailable"
+          -zone = !availability[day].nil? && availability[day][time] && availability[day][time].zone ? availability[day][time].zone.name : nil
+          %td{class: "calendar-#{level}"}
+            -unless calendar[day].nil?
+              -calendar[day][time].nil? ? nil : calendar[day][time].each do |st|
+                %div
+                  %p
+                    - if current_user.is_admin?
+                      %div.btn-group
+                        %button.btn.btn-xs.btn-default.dropdown-toggle{type:"button", :"data-toggle" => "dropdown"}
+                          %span.caret
+                        %ul.dropdown-menu{role:"menu"}
+                          %li
+                            =link_to 'View', customer_path(st.customer)
+                          %li
+                            =link_to 'Edit', edit_customer_path(st.customer)
+                    =st.customer.name
+                    -unless shopper
+                      ="(#{link_to st.customer.shopper.name, shopper_path(st.customer.shopper)})".html_safe
+            -unless shopper
+              -if !availability[day].nil? && availability[day][time]
                 %p
-                  - if current_user.is_admin?
-                    %div.btn-group
-                      %button.btn.btn-xs.btn-default.dropdown-toggle{type:"button", :"data-toggle" => "dropdown"}
-                        %span.caret
-                      %ul.dropdown-menu{role:"menu"}
-                        %li
-                          =link_to 'View', customer_path(st.customer)
-                        %li
-                          =link_to 'Edit', edit_customer_path(st.customer)
-                  =st.customer.name
-                  -unless shopper
-                    ="(#{link_to st.customer.shopper.name, shopper_path(st.customer.shopper)})".html_safe
-          -unless shopper
-            -if !availability[day].nil? && availability[day][time]
-              %p
-                Available:
-                =availability[day][time].map{|s| link_to s.name, shopper_path(s)}.join(', ').html_safe
-          -if current_user.is_shopper? && shopper
-            -link_text = !availability[day].nil? && availability[day][time] ? "Mark Unavailable" : "Mark Available"
-            =link_to link_text, shopper_toggle_availability_path(id: shopper.id, day: day, time: time), :"data-day" => day, :"data-time" => time, class: 'js-toggle-available'
+                  Available:
+                  =availability[day][time].map{|s| link_to s.name, shopper_path(s)}.join(', ').html_safe
+            -if current_user.is_shopper? && shopper
+              =select_tag :"available-#{day}-#{time}", options_for_select(ShoppingAvailability.levels, level), :"data-url" => shopper_toggle_availability_path(id: shopper.id), :"data-day" => day, :"data-time" => time, class: 'js-toggle-available form-control availability'
+              =select_tag :"zone-#{day}-#{time}", grouped_options_for_select(Zone.grouped_options, zone), include_blank: true, class: 'js-toggle-available form-control zone'
+%style
+  @media only screen and (max-width: 768px) {
+  td:nth-of-type(2):before { content: "Sunday"; }
+  td:nth-of-type(3):before { content: "Monday"; }
+  td:nth-of-type(4):before { content: "Tuesday"; }
+  td:nth-of-type(5):before { content: "Wednesday"; }
+  td:nth-of-type(6):before { content: "Thursday"; }
+  td:nth-of-type(7):before { content: "Friday"; }
+  td:nth-of-type(8):before { content: "Saturday"; }
+  }

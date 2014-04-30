@@ -55,19 +55,26 @@ class Shopper < User
     days_hash = {}
     shopping_availabilities.each do |st|
       days_hash[st.day] = {} if days_hash[st.day].nil?
-      days_hash[st.day][st.time] = true
+      days_hash[st.day][st.time] = st
     end
     days_hash
   end
 
-  def toggle_availability(day, time)
+  def update_availability(options)
+    day = options[:day]
+    time = options[:time]
+    zone = options[:zone]
+    level = options[:level]
+    
     # for some reason find is not returning anything :/
     if availability = shopping_availabilities.find_all{|a| a.day == day && a.time == time}.first
-      availability.destroy
-      return {action: 'destroy', object: nil, count: 1}
+      availability.level = level
+      availability.zone = Zone.where(name: zone).first
+      availability.save
+      return {action: 'update', object: availability}
     else
-      availability = shopping_availabilities.create(day: day, time: time)
-      return {action: 'create', object: availability, count: 1}
+      availability = shopping_availabilities.create(day: day, time: time, level: level, zone: zone)
+      return {action: 'create', object: availability}
     end
   end
 end

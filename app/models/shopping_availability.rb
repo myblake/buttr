@@ -4,6 +4,7 @@ class ShoppingAvailability
   belongs_to :zone
   field :day, type: String
   field :time, type: String
+  field :level, type: String
 
   # TODO: add geo and maybe list of stores
 
@@ -16,6 +17,10 @@ class ShoppingAvailability
 
     def times
       %w(morning afternoon evening night)
+    end
+
+    def levels
+      %w(available partial booked unavailable)
     end
   end
 end
